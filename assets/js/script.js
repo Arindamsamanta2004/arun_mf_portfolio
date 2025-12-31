@@ -28,17 +28,27 @@ document.querySelectorAll('.nav-links a').forEach(link => {
 
 // Verify ARN Logic
 const verifyBtn = document.getElementById('verifyBtn');
+const copyBtn = document.getElementById('copyBtn');
+
+if (copyBtn) {
+    copyBtn.addEventListener('click', () => {
+        navigator.clipboard.writeText('257145').then(() => {
+            const icon = copyBtn.querySelector('i');
+            icon.classList.remove('fa-copy');
+            icon.classList.add('fa-check');
+            setTimeout(() => {
+                icon.classList.remove('fa-check');
+                icon.classList.add('fa-copy');
+            }, 2000);
+            alert("ARN Copied: 257145");
+        });
+    });
+}
+
 if (verifyBtn) {
     verifyBtn.addEventListener('click', () => {
-        // Copy ARN to clipboard
-        navigator.clipboard.writeText('257145').then(() => {
-            alert("ARN Copied: 257145\n\nPlease paste it in the search box on the next page.");
-            // Redirect to AMFI website
-            window.open('https://www.amfiindia.com/locate-mutual-fund-distributor', '_blank');
-        }).catch(err => {
-            // Fallback if clipboard fails
-            window.open('https://www.amfiindia.com/locate-mutual-fund-distributor', '_blank');
-        });
+        // Redirect to AMFI website
+        window.open('https://www.amfiindia.com/locate-mutual-fund-distributor', '_blank');
     });
 }
 

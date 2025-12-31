@@ -167,6 +167,7 @@ nav {
     animation: slideDownFade 0.8s ease-out forwards;
     display: inline-block;
     background: linear-gradient(to right, var(--primary-color), var(--primary-dark));
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -521,8 +522,36 @@ section {
     margin-bottom: 20px;
 }
 
+.verify-box .disclaimer {
+    font-size: 0.8rem;
+    opacity: 0.7;
+    margin-bottom: 0;
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+#copyBtn {
+    position: absolute;
+    right: 10px;
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: transform 0.2s;
+}
+
+#copyBtn:hover {
+    transform: scale(1.1);
+}
+
 .verify-input-group input {
-    padding: 12px 20px;
+    padding: 12px 40px 12px 20px;
+    /* Extra padding on right for icon */
     border-radius: var(--radius);
     border: none;
     outline: none;
@@ -531,12 +560,6 @@ section {
     font-size: 1.1rem;
     font-weight: 600;
     color: var(--text-dark);
-}
-
-.verify-box .disclaimer {
-    font-size: 0.8rem;
-    opacity: 0.7;
-    margin-bottom: 0;
 }
 
 @media (max-width: 480px) {
