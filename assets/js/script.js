@@ -30,8 +30,15 @@ document.querySelectorAll('.nav-links a').forEach(link => {
 const verifyBtn = document.getElementById('verifyBtn');
 if (verifyBtn) {
     verifyBtn.addEventListener('click', () => {
-        // Redirect to AMFI website
-        window.open('https://www.amfiindia.com/locate-your-nearest-mutual-fund-distributor-details', '_blank');
+        // Copy ARN to clipboard
+        navigator.clipboard.writeText('257145').then(() => {
+            alert("ARN Copied: 257145\n\nPlease paste it in the search box on the next page.");
+            // Redirect to AMFI website
+            window.open('https://www.amfiindia.com/locate-mutual-fund-distributor', '_blank');
+        }).catch(err => {
+            // Fallback if clipboard fails
+            window.open('https://www.amfiindia.com/locate-mutual-fund-distributor', '_blank');
+        });
     });
 }
 
