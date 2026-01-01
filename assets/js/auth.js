@@ -28,7 +28,9 @@ if (typeof SUPABASE_URL === 'undefined' || typeof SUPABASE_ANON_KEY === 'undefin
                 statusDiv.innerHTML = 'Success! Redirecting...';
                 statusDiv.classList.add('success');
                 setTimeout(() => {
-                    window.location.href = 'admin.html';
+                    // Redirect to home page for normal users
+                    // (Admin can access dashboard via footer link if authorized)
+                    window.location.href = 'index.html';
                 }, 1000);
 
             } catch (error) {
