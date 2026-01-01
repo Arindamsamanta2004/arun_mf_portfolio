@@ -47,10 +47,8 @@ if (copyBtn) {
 
 if (verifyBtn) {
     verifyBtn.addEventListener('click', () => {
-        verifyBtn.addEventListener('click', () => {
-            // Redirect to AMFI website
-            window.open('https://www.amfiindia.com/locate-distributor', '_blank');
-        });
+        // Redirect to AMFI website
+        window.open('https://www.amfiindia.com/locate-distributor', '_blank');
     });
 }
 
