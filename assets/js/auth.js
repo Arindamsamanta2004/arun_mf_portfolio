@@ -69,18 +69,30 @@ if (typeof SUPABASE_URL === 'undefined' || typeof SUPABASE_ANON_KEY === 'undefin
             statusDiv.className = 'auth-status'; // reset class
 
             try {
-                const { data, error } = await supabaseAuth.auth.signInWithPassword({
+                // 1. Sign In
+                const { data: { user }, error } = await supabaseAuth.auth.signInWithPassword({
                     email: email,
                     password: password,
                 });
 
                 if (error) throw error;
 
+                // 2. Check Role to decide where to go
+                const { data: profile } = await supabaseAuth
+                    .from('profiles')
+                    .select('role')
+                    .eq('id', user.id)
+                    .single();
+
                 statusDiv.innerHTML = 'Success! Redirecting...';
                 statusDiv.classList.add('success');
+
                 setTimeout(() => {
-                    // Redirect to home page for normal users
-                    window.location.href = 'index.html';
+                    if (profile && profile.role === 'admin') {
+                        window.location.href = 'admin.html';
+                    } else {
+                        window.location.href = 'appointment.html';
+                    }
                 }, 1000);
 
             } catch (error) {

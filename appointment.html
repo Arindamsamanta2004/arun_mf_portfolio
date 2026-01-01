@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Appointment | Arun Bikash Samanta</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <!-- Supabase SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">
+                    <img src="assets/images/logo.png" alt="Arun Bikash Samanta">
+                </a>
+                <ul class="nav-links">
+                    <li><a href="index.html#home">Home</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="#" id="logoutBtn" style="color: red;">Logout</a></li>
+                </ul>
+                <div class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Appointment Section -->
+    <section class="section-padding" style="padding-top: 150px; min-height: 80vh;">
+        <div class="container">
+            <div class="section-title">
+                <h2>Book an Appointment</h2>
+                <div class="title-underline"></div>
+                <p>Schedule a meeting to discuss your financial goals.</p>
+            </div>
+
+            <div class="appointment-wrapper"
+                style="max-width: 800px; margin: 0 auto; display: grid; grid-template-columns: 1fr; gap: 40px;">
+
+                <!-- Booking Form -->
+                <div class="auth-box" style="text-align: left;">
+                    <h3>New Appointment</h3>
+                    <form id="appointmentForm">
+                        <div class="form-group">
+                            <label for="date">Date</label>
+                            <input type="date" id="date" required min="">
+                        </div>
+                        <div class="form-group">
+                            <label for="time">Time</label>
+                            <input type="time" id="time" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="reason">Reason for Meeting</label>
+                            <select id="reason" required
+                                style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                                <option value="" disabled selected>Select a reason...</option>
+                                <option value="New Investment">New Investment</option>
+                                <option value="Portfolio Review">Portfolio Review</option>
+                                <option value="SIP Inquiry">SIP Inquiry</option>
+                                <option value="General Consultation">General Consultation</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Book Now</button>
+                    </form>
+                    <div id="formStatus" class="auth-status"></div>
+                </div>
+
+                <!-- My Appointments List -->
+                <div class="my-appointments">
+                    <h3 style="margin-bottom: 20px;">My Upcoming Appointments</h3>
+                    <div id="loading" style="text-align: center;">Loading...</div>
+                    <div class="table-responsive" id="appointmentsTableWrapper" style="display: none;">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                    <th>Reason</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="appointmentsTableBody">
+                                <!-- Data will be inserted here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3>Arun Bikash Samanta</h3>
+                    <p>AMFI Registered Mutual Fund Distributor</p>
+                </div>
+                <div class="copyright">
+                    <p>&copy; 2024 Arun Bikash Samanta. All Rights Reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/config.js"></script>
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/appointment.js"></script>
+    <script src="assets/js/script.js"></script>
+    <script>
+        // Set min date to today
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('date').setAttribute('min', today);
+    </script>
+</body>
+
+</html>

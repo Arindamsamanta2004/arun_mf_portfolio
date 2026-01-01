@@ -818,6 +818,7 @@ footer {
         border-radius: 50%;
     }
 }
+
 /* --- Authentication & Admin Styles --- */
 
 .auth-box {
@@ -826,7 +827,7 @@ footer {
     background: var(--white);
     padding: 30px;
     border-radius: var(--radius);
-    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
 
@@ -869,17 +870,19 @@ footer {
     overflow-x: auto;
     background: var(--white);
     border-radius: var(--radius);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
     padding: 20px;
 }
 
 .admin-table {
     width: 100%;
     border-collapse: collapse;
-    min-width: 600px; /* Ensure table doesn't squish too much */
+    min-width: 600px;
+    /* Ensure table doesn't squish too much */
 }
 
-.admin-table th, .admin-table td {
+.admin-table th,
+.admin-table td {
     padding: 12px 15px;
     text-align: left;
     border-bottom: 1px solid #eee;
@@ -897,4 +900,32 @@ footer {
 
 .admin-table tr:hover {
     background-color: #f9f9f9;
+}
+
+.status-badge {
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.status-badge.pending {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.status-badge.confirmed {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.status-badge.completed {
+    background-color: #d1ecf1;
+    color: #0c5460;
+}
+
+.status-badge.cancelled {
+    background-color: #f8d7da;
+    color: #721c24;
 }

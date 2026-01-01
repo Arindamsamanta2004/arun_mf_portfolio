@@ -72,6 +72,32 @@
                     </tbody>
                 </table>
             </div>
+
+            <!-- APPOINTMENTS SECTION -->
+            <div class="section-title" style="margin-top: 50px;">
+                <h2>Appointments</h2>
+                <div class="title-underline"></div>
+            </div>
+
+            <!-- Loading State -->
+            <div id="loadingAppts" style="text-align: center; font-size: 1.2rem;">Loading appointments...</div>
+
+            <div class="table-responsive" id="apptsTableWrapper" style="display: none;">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>User ID</th>
+                            <th>Reason</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="apptsTableBody">
+                        <!-- Data will be inserted here -->
+                    </tbody>
+                </table>
+            </div>
         </div>
     </section>
 
@@ -104,7 +130,7 @@
                 return;
             }
 
-            // Fetch Data
+            // Fetch Contacts Data
             try {
                 const { data, error } = await supabase
                     .from('contacts')
@@ -132,10 +158,42 @@
                 document.getElementById('contactsTableWrapper').style.display = 'block';
 
             } catch (err) {
-                console.error('Error fetching data:', err);
+                console.error('Error fetching contacts:', err);
                 document.getElementById('loading').style.display = 'none';
-                document.getElementById('errorMsg').innerText = 'Failed to load data. You may not have permission.';
+                document.getElementById('errorMsg').innerText = 'Failed to load contacts.';
                 document.getElementById('errorMsg').style.display = 'block';
+            }
+
+            // Fetch Appointments Data
+            try {
+                const { data, error } = await supabase
+                    .from('appointments')
+                    .select('*')
+                    .order('appointment_date', { ascending: true }); // Newest first by date
+
+                if (error) throw error;
+
+                const apptBody = document.getElementById('apptsTableBody');
+                if (data.length === 0) {
+                    apptBody.innerHTML = '<tr><td colspan="5" style="text-align:center;">No appointments found.</td></tr>';
+                } else {
+                    apptBody.innerHTML = data.map(appt => `
+                        <tr>
+                            <td>${new Date(appt.appointment_date).toLocaleDateString()}</td>
+                            <td>${appt.appointment_time}</td>
+                            <td>${appt.user_id}</td>
+                            <td>${appt.reason}</td>
+                            <td><span class="status-badge ${appt.status}">${appt.status}</span></td>
+                        </tr>
+                    `).join('');
+                }
+
+                document.getElementById('loadingAppts').style.display = 'none';
+                document.getElementById('apptsTableWrapper').style.display = 'block';
+
+            } catch (err) {
+                console.error('Error fetching appointments:', err);
+                document.getElementById('loadingAppts').style.display = 'none';
             }
         });
     </script>
