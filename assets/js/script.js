@@ -47,8 +47,10 @@ if (copyBtn) {
 
 if (verifyBtn) {
     verifyBtn.addEventListener('click', () => {
-        // Redirect to AMFI website
-        window.open('https://www.amfiindia.com/locate-mutual-fund-distributor', '_blank');
+        verifyBtn.addEventListener('click', () => {
+            // Redirect to AMFI website
+            window.open('https://www.amfiindia.com/locate-distributor', '_blank');
+        });
     });
 }
 
