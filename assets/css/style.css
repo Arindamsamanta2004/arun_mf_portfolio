@@ -818,3 +818,83 @@ footer {
         border-radius: 50%;
     }
 }
+/* --- Authentication & Admin Styles --- */
+
+.auth-box {
+    max-width: 400px;
+    margin: 0 auto;
+    background: var(--white);
+    padding: 30px;
+    border-radius: var(--radius);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.auth-box h2 {
+    margin-bottom: 10px;
+    color: var(--primary-dark);
+}
+
+.auth-box p {
+    color: var(--text-muted);
+    margin-bottom: 20px;
+}
+
+.auth-status {
+    margin: 15px 0;
+    font-size: 0.9rem;
+    min-height: 20px;
+}
+
+.auth-status.error {
+    color: red;
+}
+
+.auth-status.success {
+    color: green;
+}
+
+.auth-links {
+    margin-top: 20px;
+    font-size: 0.9rem;
+}
+
+.auth-links a {
+    color: var(--primary-dark);
+    font-weight: 600;
+}
+
+/* Admin Table */
+.table-responsive {
+    overflow-x: auto;
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    padding: 20px;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px; /* Ensure table doesn't squish too much */
+}
+
+.admin-table th, .admin-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.admin-table th {
+    background-color: var(--primary-light);
+    color: var(--primary-dark);
+    font-weight: 600;
+}
+
+.admin-table tr:last-child td {
+    border-bottom: none;
+}
+
+.admin-table tr:hover {
+    background-color: #f9f9f9;
+}

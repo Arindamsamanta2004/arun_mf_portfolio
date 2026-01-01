@@ -14,10 +14,15 @@ create table contacts (
 -- but for a simple public contact form where anyone can insert, 
 -- you can either keep RLS off or set a policy to allow public inserts.
 
--- Option 1: Disable RLS (Simpler for getting started)
-alter table contacts disable row level security;
+-- Enable Row Level Security (RLS)
+alter table contacts enable row level security;
 
--- Option 2: Allow public inserts (More secure)
--- alter table contacts enable row level security;
--- create policy "Allow public inserts" on contacts for insert with check (true);
--- create policy "Allow read access for authenticated users only" on contacts for select using (auth.role() = 'authenticated');
+-- Policy 1: Allow anyone (anon) to INSERT data (So the contact form works)
+create policy "Allow public inserts" 
+on contacts for insert 
+with check (true);
+
+-- Policy 2: Allow authenticated users (Admin) to SELECT data (View the dashboard)
+create policy "Allow internal read access" 
+on contacts for select 
+using (auth.role() = 'authenticated');
