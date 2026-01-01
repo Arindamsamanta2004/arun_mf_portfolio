@@ -22,11 +22,16 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: var(--font-body);
     color: var(--text-dark);
     line-height: 1.6;
     background-color: var(--white);
+    overflow-x: hidden;
 }
 
 h1,
@@ -139,10 +144,26 @@ nav {
 
 /* Hero Section */
 .hero {
-    padding: 160px 0 100px;
-    background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 100%);
+    padding: 180px 0 100px;
+    background: linear-gradient(-45deg, #f0fdf4, #e6fffa, #ffffff, #f0fff4);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
     position: relative;
     overflow: hidden;
+}
+
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 .hero .container {
@@ -411,7 +432,8 @@ section {
 }
 
 .service-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
 }
 
 .icon-box {
@@ -468,7 +490,8 @@ section {
 .feature-card:hover {
     border-color: var(--primary-color);
     background: var(--white);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
 }
 
 .feature-card i {

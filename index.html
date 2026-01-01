@@ -20,6 +20,8 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/style.css?v=4">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 
 <body>
@@ -71,7 +73,7 @@
                     </div>
                 </div>
             </div>
-            <div class="hero-image">
+            <div class="hero-image" data-aos="fade-left" data-aos-delay="200">
                 <div class="globe-bg"></div>
                 <img src="assets/images/pic.jpeg" alt="Arun Bikash Samanta">
             </div>
@@ -91,21 +93,21 @@
                         experience in helping individuals and families achieve long-term financial goals through
                         disciplined investing."</p>
                     <div class="about-features">
-                        <div class="feature-item">
+                        <div class="feature-item" data-aos="zoom-in" data-aos-delay="100">
                             <i class="fas fa-calendar-check"></i>
                             <div>
                                 <h4>Est. Since 2019</h4>
                                 <p>Years of dedicated service</p>
                             </div>
                         </div>
-                        <div class="feature-item">
+                        <div class="feature-item" data-aos="zoom-in" data-aos-delay="200">
                             <i class="fas fa-hand-holding-heart"></i>
                             <div>
                                 <h4>Ethical Advisory</h4>
                                 <p>Transparent & client-first approach</p>
                             </div>
                         </div>
-                        <div class="feature-item">
+                        <div class="feature-item" data-aos="zoom-in" data-aos-delay="300">
                             <i class="fas fa-chart-line"></i>
                             <div>
                                 <h4>Wealth Creation</h4>
@@ -126,14 +128,14 @@
                 <div class="title-underline"></div>
             </div>
             <div class="services-grid">
-                <div class="service-card">
+                <div class="service-card" data-aos="fade-up" data-aos-delay="100">
                     <div class="icon-box">
                         <i class="fas fa-piggy-bank"></i>
                     </div>
                     <h3>SIP & Lump Sum</h3>
                     <p>Systematic Investment Plans for disciplined investing and one-time lump sum investments.</p>
                 </div>
-                <div class="service-card">
+                <div class="service-card" data-aos="fade-up" data-aos-delay="200">
                     <div class="icon-box">
                         <i class="fas fa-file-invoice-dollar"></i>
                     </div>
@@ -172,7 +174,7 @@
                 <div class="title-underline"></div>
             </div>
             <div class="features-list">
-                <div class="feature-card">
+                <div class="feature-card" data-aos="fade-right" data-aos-delay="100">
                     <i class="fas fa-check-circle"></i>
                     <span>Trusted & AMFI-Registered Advisor</span>
                 </div>
@@ -267,6 +269,14 @@
         <span>Chat Now</span>
     </a>
 
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+    </script>
     <script src="assets/js/script.js?v=4"></script>
 </body>
 
