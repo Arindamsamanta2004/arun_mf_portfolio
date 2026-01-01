@@ -5,7 +5,58 @@ if (typeof SUPABASE_URL === 'undefined' || typeof SUPABASE_ANON_KEY === 'undefin
     // Initialize Supabase
     const supabaseAuth = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-    // LOGIN FORM HANDLER
+    // ADMIN LOGIN FORM HANDLER
+    const adminLoginForm = document.getElementById('adminLoginForm');
+    if (adminLoginForm) {
+        adminLoginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('adminEmail').value;
+            const password = document.getElementById('adminPassword').value;
+            const statusDiv = document.getElementById('adminAuthStatus');
+
+            statusDiv.innerHTML = 'Verifying credentials...';
+            statusDiv.className = 'auth-status';
+
+            try {
+                // 1. Sign In
+                const { data: { user }, error: signInError } = await supabaseAuth.auth.signInWithPassword({
+                    email: email,
+                    password: password,
+                });
+
+                if (signInError) throw signInError;
+
+                // 2. Check Role in Profiles Table
+                const { data: profile, error: profileError } = await supabaseAuth
+                    .from('profiles')
+                    .select('role')
+                    .eq('id', user.id)
+                    .single();
+
+                if (profileError) {
+                    throw new Error('Could not verify access level.');
+                }
+
+                if (profile && profile.role === 'admin') {
+                    statusDiv.innerHTML = 'Access Granted. Redirecting...';
+                    statusDiv.classList.add('success');
+                    setTimeout(() => {
+                        window.location.href = 'admin.html';
+                    }, 1000);
+                } else {
+                    // Not an admin - sign out immediately
+                    await supabaseAuth.auth.signOut();
+                    throw new Error('Access Denied: You do not have administrator privileges.');
+                }
+
+            } catch (error) {
+                statusDiv.innerHTML = `Error: ${error.message}`;
+                statusDiv.classList.add('error');
+            }
+        });
+    }
+
+    // LOGIN FORM HANDLER (User)
     const loginForm = document.getElementById('loginForm');
     if (loginForm) {
         loginForm.addEventListener('submit', async (e) => {
@@ -29,7 +80,6 @@ if (typeof SUPABASE_URL === 'undefined' || typeof SUPABASE_ANON_KEY === 'undefin
                 statusDiv.classList.add('success');
                 setTimeout(() => {
                     // Redirect to home page for normal users
-                    // (Admin can access dashboard via footer link if authorized)
                     window.location.href = 'index.html';
                 }, 1000);
 
@@ -67,8 +117,11 @@ if (typeof SUPABASE_URL === 'undefined' || typeof SUPABASE_ANON_KEY === 'undefin
 
                 if (error) throw error;
 
-                statusDiv.innerHTML = 'Account created! Please check your email to confirm, then log in.';
+                statusDiv.innerHTML = 'Account created! Please log in.';
                 statusDiv.classList.add('success');
+                setTimeout(() => {
+                    window.location.href = 'login.html';
+                }, 2000);
 
             } catch (error) {
                 statusDiv.innerHTML = `Error: ${error.message}`;
@@ -83,7 +136,7 @@ if (typeof SUPABASE_URL === 'undefined' || typeof SUPABASE_ANON_KEY === 'undefin
         logoutBtn.addEventListener('click', async (e) => {
             e.preventDefault();
             await supabaseAuth.auth.signOut();
-            window.location.href = 'login.html';
+            window.location.href = 'index.html'; // Redirect to home
         });
     }
 }

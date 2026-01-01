@@ -26,3 +26,45 @@ with check (true);
 create policy "Allow internal read access" 
 on contacts for select 
 using (auth.role() = 'authenticated');
+
+-- PROFILES TABLE (For Role-Based Access Control)
+create table public.profiles (
+  id uuid references auth.users not null primary key,
+  email text,
+  role text default 'user' check (role in ('user', 'admin')),
+  created_at timestamp with time zone default timezone('utc'::text, now()) not null
+);
+
+-- Enable RLS for profiles
+alter table profiles enable row level security;
+
+-- Policy: Users can read their own profile
+create policy "Users can view own profile" on profiles 
+for select using (auth.uid() = id);
+
+-- TRIGGER: Automatically create profile on signup
+create or replace function public.handle_new_user() 
+returns trigger as $$
+begin
+  insert into public.profiles (id, email, role)
+  values (new.id, new.email, 'user');
+  return new;
+end;
+$$ language plpgsql security definer;
+
+create trigger on_auth_user_created
+  after insert on auth.users
+  for each row execute procedure public.handle_new_user();
+
+-- UPDATE CONTACTS POLICY TO USE ROLES
+drop policy "Allow internal read access" on contacts;
+
+create policy "Admins can view all contacts" 
+on contacts for select 
+using (
+  exists (
+    select 1 from profiles
+    where profiles.id = auth.uid()
+    and profiles.role = 'admin'
+  )
+);

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Portal | Arun Bikash Samanta</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <!-- Supabase SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">
+                    <img src="assets/images/logo.png" alt="Arun Bikash Samanta">
+                </a>
+                <ul class="nav-links">
+                    <li><a href="index.html#home">Home</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Admin Login Section -->
+    <section class="auth-section section-padding" style="padding-top: 150px; min-height: 80vh;">
+        <div class="container">
+            <div class="auth-box" style="border-top: 5px solid var(--primary-dark);">
+                <h2 style="color: var(--primary-dark);">Admin Portal</h2>
+                <p>Authorized personnel only.</p>
+
+                <form id="adminLoginForm">
+                    <div class="form-group">
+                        <label for="adminEmail">Email Address</label>
+                        <input type="email" id="adminEmail" required placeholder="admin@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="adminPassword">Password</label>
+                        <input type="password" id="adminPassword" required placeholder="********">
+                    </div>
+                    <button type="submit" class="btn btn-primary"
+                        style="width: 100%; background-color: var(--primary-dark);">Access Dashboard</button>
+                </form>
+
+                <div id="adminAuthStatus" class="auth-status"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scripts -->
+    <script src="assets/js/config.js"></script>
+    <script src="assets/js/auth.js"></script>
+</body>
+
+</html>
